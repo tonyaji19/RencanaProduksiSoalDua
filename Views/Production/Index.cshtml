@@ -1,0 +1,173 @@
+﻿@model RencanaProduksiSoalDua.Models.ProductionPlan
+
+@{
+    ViewData["Title"] = "Production Plan";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: AUTO;
+            margin: 0;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 6px;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px 0;
+        }
+
+        .container h1 {
+            padding-bottom: 12px;
+        }
+
+        .containerhasil {
+            padding-top: 18px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        input[type="number"] {
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 2rem;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        table td {
+            background-color: #fafafa;
+        }
+
+        @@media (max-width: 600px) {
+            table {
+                font-size: 0.9rem;
+            }
+
+            button {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <form method="post">
+        <label for="Monday">Senin</label>
+        <input type="number" id="Monday" name="Monday" asp-for="Monday" required />
+
+        <label for="Tuesday">Selasa</label>
+        <input type="number" id="Tuesday" name="Tuesday" asp-for="Tuesday" required />
+
+        <label for="Wednesday">Rabu</label>
+        <input type="number" id="Wednesday" name="Wednesday" asp-for="Wednesday" required />
+
+        <label for="Thursday">Kamis</label>
+        <input type="number" id="Thursday" name="Thursday" asp-for="Thursday" required />
+
+        <label for="Friday">Jumat</label>
+        <input type="number" id="Friday" name="Friday" asp-for="Friday" required />
+
+        <label for="Saturday">Sabtu</label>
+        <input type="number" id="Saturday" name="Saturday" asp-for="Saturday" required />
+
+        <label for="Sunday">Minggu</label>
+        <input type="number" id="Sunday" name="Sunday" asp-for="Sunday" required />
+
+        <button type="submit">Proses Produksi</button>
+    </form>
+
+    @if (Model != null && Model.CreatedAt != DateTime.MinValue)
+    {
+        <div class="containerhasil">
+            <h2>Rencana Produksi yang Disesuaikan</h2>
+            <table>
+                <tr><th>Senin</th><td>@Model.AdjustedMonday</td></tr>
+                <tr><th>Selasa</th><td>@Model.AdjustedTuesday</td></tr>
+                <tr><th>Rabu</th><td>@Model.AdjustedWednesday</td></tr>
+                <tr><th>Kamis</th><td>@Model.AdjustedThursday</td></tr>
+                <tr><th>Jumat</th><td>@Model.AdjustedFriday</td></tr>
+                <tr><th>Sabtu</th><td>@Model.AdjustedSaturday</td></tr>
+                <tr><th>Minggu</th><td>@Model.AdjustedSunday</td></tr>
+            </table>
+        </div>
+    }
+</div>
+
+</body>
+</html>
